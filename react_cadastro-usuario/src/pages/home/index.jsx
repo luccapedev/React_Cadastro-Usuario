@@ -1,9 +1,11 @@
+import { useEffect } from 'react'
 import './style.css'
 import Trash from '../../assets/trash.svg'
+import api from '../../services/api'
 
 function Home() {
 
-  const users = [
+  let users = [
     {
       id: '1312313',
       name: 'Rodolfo',
@@ -17,6 +19,14 @@ function Home() {
       email: 'rodrod@email.com',
     },
   ]
+
+  async function getUsers() {
+    users = await api.get('/usuarios')
+  }
+
+  useEffect(() => {
+    getUsers()
+  }, [])
 
   return (
     <div className='container'>
